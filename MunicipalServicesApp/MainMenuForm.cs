@@ -3,12 +3,6 @@ using System.Windows.Forms;
 
 namespace MunicipalServicesApp
 {
-    /// <summary>
-    /// Resident hub, shown after a successful login. Presents the three
-    /// main tasks required by the brief. "Local Events and Announcements"
-    /// remains disabled (a future part of the PoE); "Report Issues" and
-    /// "Track My Service Requests" are both live.
-    /// </summary>
     public partial class MainMenuForm : Form
     {
         private static readonly string[] Tips =
@@ -49,6 +43,8 @@ namespace MunicipalServicesApp
         {
             AddHover(btnReportIssues, System.Drawing.Color.FromArgb(0, 120, 215), System.Drawing.Color.FromArgb(0, 99, 177));
             AddHover(btnServiceStatus, System.Drawing.Color.FromArgb(0, 153, 76), System.Drawing.Color.FromArgb(0, 128, 64));
+            // NEW: Added hover effect for the Local Events button (Purple theme)
+            AddHover(btnLocalEvents, System.Drawing.Color.FromArgb(128, 0, 128), System.Drawing.Color.FromArgb(100, 0, 100));
         }
 
         private void AddHover(Button button, System.Drawing.Color normal, System.Drawing.Color hover)
@@ -77,9 +73,22 @@ namespace MunicipalServicesApp
             }
         }
 
+        // NEW: Handler for the Local Events button
+        private void btnLocalEvents_Click(object sender, EventArgs e)
+        {
+            using (var eventsForm = new LocalEventsForm())
+            {
+                this.Hide();
+                eventsForm.ShowDialog();
+                this.Show();
+            }
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void MainMenuForm_Load(object sender, EventArgs e) { }
     }
 }
