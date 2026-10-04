@@ -1,23 +1,24 @@
-using MunicipalServicesApp.Models;
+﻿using MunicipalServicesApp.Models;
 
 namespace MunicipalServicesApp
 {
     /// <summary>
-    /// Holds the currently logged-in account for the lifetime of the running
-    /// application, so forms can tell who's using them without passing the
-    /// account around everywhere.
+    /// Holds the current logged-in user's information.
     /// </summary>
     public static class UserSession
     {
+        // The currently logged-in account (null when no user is logged in)
         public static UserAccount CurrentUser { get; set; }
 
-        public static bool IsLoggedIn => CurrentUser != null;
+        // Friendly display name for UI
+        public static string FriendlyName => CurrentUser?.FullName ?? "Resident";
 
-        public static string FriendlyName =>
-            CurrentUser == null || string.IsNullOrWhiteSpace(CurrentUser.FullName)
-                ? "there"
-                : CurrentUser.FullName.Trim();
+        // Role derived from CurrentUser (string for compatibility with existing checks)
+        public static string Role => CurrentUser != null && CurrentUser.Role == UserRole.Municipal ? "Staff" : "Resident";
 
-        public static void LogOut() => CurrentUser = null;
+        public static void LogOut()
+        {
+            CurrentUser = null;
+        }
     }
 }

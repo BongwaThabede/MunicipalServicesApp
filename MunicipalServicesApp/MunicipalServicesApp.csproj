@@ -43,6 +43,9 @@
     <Compile Include="DataStructures.cs" />
     <Compile Include="Data\IssueRepository.cs" />
     <Compile Include="Data\UserRepository.cs" />
+    <Compile Include="EditEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LocalEventsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +102,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EditEventForm.resx">
+      <DependentUpon>EditEventForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LocalEventsForm.resx">
       <DependentUpon>LocalEventsForm.cs</DependentUpon>
     </EmbeddedResource>
